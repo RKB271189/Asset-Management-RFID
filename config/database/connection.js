@@ -16,10 +16,12 @@ async function execute_data(query, post) {
     };
     return new Promise(function (resolve, reject) {
         pool.getConnection(function (errorconnection, connection) {
-            connection.release();
             if (errorconnection) {
+                console.log(errorconnection);
+                connection.release();
                 reject(errorconnection);
             }
+            connection.release();
             connection.query(query, post, function (error, detail) {
                 if (error) {
                     reject(error.sqlMessage)
@@ -45,10 +47,12 @@ async function fetch_data(query) {
     };
     return new Promise(function (resolve, reject) {
         pool.getConnection(function (errorconnection, connection) {
-            connection.release();
             if (errorconnection) {
+                console.log(errorconnection);
+                connection.release();
                 reject(errorconnection);
             } else {
+                connection.release();
                 connection.query(query, function (error, records, fields) {
                     if (error) {
                         reject(error.sqlMessage);
