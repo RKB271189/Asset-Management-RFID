@@ -32,7 +32,11 @@ app.engine('hbs', hbs({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/', route);
+<<<<<<< HEAD
 const port = process.env.PORT;
 const server = app.listen(port, function () {
+=======
+const server = app.listen(80, function () {
+>>>>>>> 811a7d418efd146584cea55810b42fec6f8f0566
     console.log("Relcon Tag Scanner Running");
 });
