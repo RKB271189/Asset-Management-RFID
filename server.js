@@ -31,7 +31,9 @@ app.engine('hbs', hbs({
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
-app.use('/', route);
+app.get('/',async (req,res)=>{
+    res.end(JSON.stringify("Hello World"));
+});
 port = process.env.PORT;
 if (port == null || port == "" || typeof port == 'undefined') {
     port = 8050;
