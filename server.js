@@ -32,6 +32,6 @@ app.engine('hbs', hbs({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/', route);
-const server = app.listen(8050, function () {
+const server = app.listen(80, function () {
     console.log("Relcon Tag Scanner Running");
 });
