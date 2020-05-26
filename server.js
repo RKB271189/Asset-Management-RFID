@@ -4,7 +4,7 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const session = require('express-session');
 const route = require('./routes/index');
-const flash=require('express-flash');
+const flash = require('express-flash');
 const app = express();
 app.use(session({
     secret: 'uni#rel@off',
@@ -32,6 +32,7 @@ app.engine('hbs', hbs({
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/', route);
-const server = app.listen(8050, function () {
+const port = process.env.PORT;
+const server = app.listen(port, function () {
     console.log("Relcon Tag Scanner Running");
 });
