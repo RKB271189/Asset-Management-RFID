@@ -1,0 +1,77 @@
+{{#section "content"}}
+<div class="jumbotron jumbotron-j">
+    <div class="container">
+        <h3>Create User</h3>
+        <div class="panel panel-default">
+            <form method="POST" action="/web/user/create-user">
+                <div class="panel-heading" style="font-weight: 600;">Field mark with (<span
+                        style="color: red;">*</span>)
+                    are mandatory</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label><span style="color: red;">*</span>First Name</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="First_Name" id="First_Name" class="form-control"
+                                placeholder="Enter First Name">
+                        </div>                       
+                    </div>
+                    <div class="form-group" style="padding-top:30px;">
+                        <label>Last Name</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="Last_Name" id="Last_Name" class="form-control" placeholder="Enter Last Name">
+                        </div>                    
+                    </div>
+                    <div class="form-group" style="padding-top:30px;">
+                        <label><span style="color: red;">*</span>Login Id</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="Login_Id" id="Login_Id" class="form-control" placeholder="Enter Login Id">
+                        </div>                       
+                    </div>
+                    <div class="form-group" style="padding-top:30px;">
+                        <label><span style="color: red;">*</span>Password</label>
+                        <div class="col-lg-12">
+                            <input type="password" name="Password" id="Password" class="form-control" placeholder="Enter Password">
+                        </div>                       
+                    </div>
+                    <div class="form-group" style="padding-top:30px;">
+                        <label><span style="color: red;">*</span>Role</label>
+                        <div class="col-lg-12">
+                            <select class="form-control" name="Role_Id">
+                                <option value="0">Select Role</option>
+                                {{#if role}}
+                                {{#each role}}                                
+                                <option value="{{Role_Code}}">{{Role_Type}}</option>
+                                {{/each}}
+                                {{/if}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-top:30px;">
+                        <label><span style="color: red;">*</span>Mobile No.</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="Mobile_No" id="Mobile_No" class="form-control" placeholder="Enter Mobile No.">
+                        </div>                        
+                    </div>
+                    <div class="form-group" style="padding-top:30px;">
+                        <label>Email</label>
+                        <div class="col-lg-12">
+                            <input type="text" name="Email" id="Email" class="form-control" placeholder="Enter Email">
+                        </div>                       
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <input type="submit" class="btn btn-danger" value="Submit">
+                    <span class="error-message">
+                        {{#if message}}
+                         {{message}}
+                        {{/if}}
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('li-user').classList.add('active');
+</script>
+{{/section}}

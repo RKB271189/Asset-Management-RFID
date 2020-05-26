@@ -1,0 +1,59 @@
+.logo{
+    color: #067364 !important;
+    padding-right: 25px;
+    font-size:20px;
+    font-weight: 700;
+}
+.anchor-a-style ul li a{
+    color:#865205 !important;
+    font-weight: 700;
+}
+.logout-a{
+    color: red !important;
+    font-size: 15px;
+    border: 1px solid #067364;
+}   
+.header-color{
+    background-color: #b8dce4;
+}
+.jumbotron-j{
+    background-color: #9baeb3;
+}
+.relcon-btn{
+    color:white;
+    float:right;
+    font-weight:600;
+    font-size:18px;
+}
+.main-header{
+    color: cadetblue;
+    text-decoration: underline;
+}
+.page-text{
+    color: #067364;
+    font-size: 19px !important;
+    padding-left: 25px;
+}
+.arrow-dropdown{
+    margin-left: 6px;
+}
+.error-message{
+    color: red;
+    padding-left:10px;
+    font-weight: 600;
+}
+.invalid-text{
+    border: 1px solid red;
+}
+.grid_view{
+
+}
+.grid_view tr td{
+    padding:5px !important;
+    text-align: center;
+}
+.grid_view tr th{
+    padding:3px !important;
+    background-color: lightseagreen;
+    color: white;
+}
