@@ -1,6 +1,6 @@
 const asset = require('express').Router();
-const controller = require('../asset/assetController');
-const request = require('../asset/AssetRequest');
+const controller = require('./AssetController');
+const request = require('./AssetRequest');
 
 
 asset.post('/create-asset', async (req, res) => {
