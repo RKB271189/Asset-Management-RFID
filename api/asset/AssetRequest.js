@@ -60,7 +60,7 @@ async function EventAssetRequest(req) {
             reject("Provide Latitude");
         } else {
             verify.GetPresenceSiteInAsset(sitecode).then(function (results) {
-                if (!result) {
+                if (!results) {
                     reject(results);
                 } else {
                     request.result = true;

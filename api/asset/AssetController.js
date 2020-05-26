@@ -62,7 +62,7 @@ async function RegisterAssetEvent(req) {
         Longitude: req.body.Longitude,
         Latitude: req.body.Latitude
     }
-    let query = "Inert into tagevent set ?";
+    let query = "Insert into tagevent set ?";
     return new Promise(function (resolve, reject) {
         database.execute_data(query, post).then(function (results) {
             if (!results.result) {
