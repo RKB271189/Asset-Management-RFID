@@ -3,12 +3,12 @@
 
 {{>header}}
 
-<body>
+<body class="body-gb-color">
 {{#if login}}
 {{{body}}}
 {{else}}
 {{>menu}}
-<div class="container" style="padding-top: 100px;">
+<div class="container-fluid" style="padding-top: 70px;">
 {{{_sections.content}}}
 </div>
 {{/if}}

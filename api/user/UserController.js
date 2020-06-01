@@ -1,5 +1,9 @@
 const authenticate = require("../../auth/authenticate");
 const database = require("../../config/database/connection");
+/**
+ * verify the user details and return that user full details in response
+ * @param {*} req 
+ */
 async function VerifyLogin(req) {
     let array_data = [];
     let data = {
@@ -10,6 +14,7 @@ async function VerifyLogin(req) {
     }
     return new Promise(function (resolve, reject) {
         let loginid = req.body.Login_Id;
+        //verifying login id
         let query = "select * from usermaster where Login_Id='" + loginid + "' limit 1";
         database.fetch_data(query).then(function (results) {
             if (!results.result) {
@@ -19,6 +24,7 @@ async function VerifyLogin(req) {
             let len = records.length;
             if (len === 1) {
                 let userpassword = req.body.Password;
+                //checking if password matches
                 if (userpassword === records[0].Password) {
                     let user = {
                         User_Id: records[0].User_Id,
@@ -34,6 +40,8 @@ async function VerifyLogin(req) {
                         userid: user.User_Id,
                         username: user.First_Name
                     }
+                    //generataing to token if the user details are currect and sending them
+                    //back with the response
                     authenticate.GenerateToken(usr).then(function (results) {
                         if (!results.result) {
                             reject(results.error)

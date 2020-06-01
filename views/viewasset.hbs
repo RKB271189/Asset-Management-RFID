@@ -1,0 +1,78 @@
+{{#section "content"}}
+<div class="row">
+    <div class="container">
+        <h3 class="page-all-header">View Asset (Please Enter Site Code)</h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form method="POST" action="/web/asset/search">
+                    <div class="form-group" style="padding-bottom: 40px;">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-2">
+                            <input class="form-control" name="Site_Code" placeholder="Enter Site Code">
+                        </div>
+                        <div class="col-md-2"><input type="submit" class="btn btn-danger" value="Search"></div>
+                    </div>
+                </form>
+                <table class="table table-bordered grid_view">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Asset Code</th>
+                            <th>Asset Type</th>
+                            <th>Description</th>
+                            {{!-- <th>Tag Id</th> --}}
+                            <th>Serial Number</th>
+                            <th>Model Number</th>
+                        </tr>
+                    </thead>
+                    {{#if asset}}
+                    {{#each asset}}
+                    <tr>
+                        <td><a href="/web/asset/edit-asset/?asset={{Asset_Id}}&site={{Site_Code}}"
+                                class="btn btn-warning btn-sm">Update</a></td>
+                        <td><a href="/web/asset/delete-asset/?asset={{Asset_Id}}&site={{Site_Code}}"
+                                class="btn btn-danger btn-sm">Delete</a></td>
+                        {{#ifeq Tag_Status 1}}                        
+                        <td style="color: brown;">{{Asset_Code}}</td>
+                        <td style="color: brown;">{{Type_Description}}</td>
+                        <td style="color: brown;">{{Description}}</td>
+                        {{!-- <td style="color: brown;">{{Tag_Id}}</td> --}}
+                        <td style="color: brown;">{{Serial_Number}}</td>
+                        <td style="color: brown;">{{Model_Number}}</td>
+                        {{else}}
+                        {{#ifeq Tag_Status 2}}                     
+                        <td style="color: darkgreen;">{{Asset_Code}}</td>
+                        <td style="color: darkgreen;">{{Type_Description}}</td>
+                        <td style="color: darkgreen;">{{Description}}</td>
+                        {{!-- <td style="color: darkgreen;">{{Tag_Id}}</td> --}}
+                        <td style="color: darkgreen;">{{Serial_Number}}</td>
+                        <td style="color: darkgreen;">{{Model_Number}}</td>
+                        {{else}}                        
+                        <td>{{Asset_Code}}</td>
+                        <td>{{Type_Description}}</td>
+                        <td>{{Description}}</td>
+                        {{!-- <td>{{Tag_Id}}</td> --}}
+                        <td>{{Serial_Number}}</td>
+                        <td>{{Model_Number}}</td>
+                        {{/ifeq}}
+                        {{/ifeq}}
+                    </tr>
+                    {{/each}}
+                    {{/if}}
+                </table>
+            </div>
+            {{#if message}}
+            <div class="panel-footer">
+                <span class="error-message">
+                    {{message}}
+                </span>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('li-configuration').classList.add('active');
+</script>
+{{/section}}

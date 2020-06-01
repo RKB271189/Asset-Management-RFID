@@ -1,77 +1,86 @@
 {{#section "content"}}
 <div class="row">
     <div class="container">
-        <h3 class="page-all-header">Create User</h3>
+        <h3 class="page-header">Update User</h3>
         <div class="panel panel-default">
-            <form method="POST" action="/web/user/create-user">
+            {{#each user}}
+            <form method="POST" action="/web/user/user-update">
                 <div class="panel-heading" style="font-weight: 600;">Field mark with (<span
                         style="color: red;">*</span>)
                     are mandatory</div>
                 <div class="panel-body">
+                    <input type="hidden" name="User_Id" value="{{User_Id}}">
                     <div class="form-group">
                         <label><span style="color: red;">*</span>First Name</label>
                         <div class="col-lg-12">
                             <input type="text" name="First_Name" id="First_Name" class="form-control"
-                                placeholder="Enter First Name">
-                        </div>                       
+                                placeholder="Enter First Name" value="{{this.First_Name}}">
+                        </div>
                     </div>
                     <div class="form-group" style="padding-top:30px;">
                         <label>Last Name</label>
                         <div class="col-lg-12">
-                            <input type="text" name="Last_Name" id="Last_Name" class="form-control" placeholder="Enter Last Name">
-                        </div>                    
+                            <input type="text" name="Last_Name" id="Last_Name" class="form-control"
+                                placeholder="Enter Last Name" value="{{this.Last_Name}}">
+                        </div>
                     </div>
                     <div class="form-group" style="padding-top:30px;">
                         <label><span style="color: red;">*</span>Login Id</label>
                         <div class="col-lg-12">
-                            <input type="text" name="Login_Id" id="Login_Id" class="form-control" placeholder="Enter Login Id">
-                        </div>                       
+                            <input type="text" name="Login_Id" id="Login_Id" class="form-control"
+                                placeholder="Enter Login Id" value="{{Login_Id}}">
+                        </div>
                     </div>
                     <div class="form-group" style="padding-top:30px;">
                         <label><span style="color: red;">*</span>Password</label>
                         <div class="col-lg-12">
-                            <input type="password" name="Password" id="Password" class="form-control" placeholder="Enter Password">
-                        </div>                       
+                            <input type="password" name="Password" id="Password" class="form-control"
+                                placeholder="Enter Password" value="{{Password}}">
+                        </div>
                     </div>
                     <div class="form-group" style="padding-top:30px;">
                         <label><span style="color: red;">*</span>Role</label>
                         <div class="col-lg-12">
-                            <select class="form-control" name="Role_Id">
+                            <select class="form-control" name="Role_Id" id="Role_Id">
                                 <option value="0">Select Role</option>
-                                {{#if role}}
-                                {{#each role}}                                
+                                {{#each Role}}
                                 <option value="{{Role_Code}}">{{Role_Type}}</option>
                                 {{/each}}
-                                {{/if}}
                             </select>
                         </div>
                     </div>
                     <div class="form-group" style="padding-top:30px;">
                         <label><span style="color: red;">*</span>Mobile No.</label>
                         <div class="col-lg-12">
-                            <input type="text" name="Mobile_No" id="Mobile_No" class="form-control" maxlength="10" placeholder="Enter Mobile No.">
-                        </div>                        
+                            <input type="text" name="Mobile_No" id="Mobile_No" class="form-control" maxlength="10"
+                                placeholder="Enter Mobile No." value="{{Mobile_No}}">
+                        </div>
                     </div>
                     <div class="form-group" style="padding-top:30px;">
                         <label>Email</label>
                         <div class="col-lg-12">
-                            <input type="text" name="Email" id="Email" class="form-control" placeholder="Enter Email">
-                        </div>                       
+                            <input type="text" name="Email" id="Email" class="form-control" placeholder="Enter Email"
+                                value="{{Email_Id}}">
+                        </div>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <input type="submit" class="btn btn-danger" value="Submit">
+                    <input type="submit" class="btn btn-danger" value="Update">
                     <span class="error-message">
                         {{#if message}}
-                         {{message}}
+                        {{message}}
                         {{/if}}
                     </span>
                 </div>
             </form>
+            {{/each}}
         </div>
     </div>
 </div>
 <script>
     document.getElementById('li-user').classList.add('active');
+    var rolecode = {{{ jsonparse roleuser }}}
+    var roleselect = document.getElementById("Role_Id");
+    roleselect.value = rolecode;
 </script>
 {{/section}}

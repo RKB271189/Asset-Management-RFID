@@ -16,12 +16,11 @@ async function execute_data(query, post) {
     };
     return new Promise(function (resolve, reject) {
         pool.getConnection(function (errorconnection, connection) {
+            connection.release();
             if (errorconnection) {
                 console.log(errorconnection);
-                connection.release();
                 reject(errorconnection);
             }
-            connection.release();
             connection.query(query, post, function (error, detail) {
                 if (error) {
                     reject(error.sqlMessage)
@@ -47,12 +46,11 @@ async function fetch_data(query) {
     };
     return new Promise(function (resolve, reject) {
         pool.getConnection(function (errorconnection, connection) {
+            connection.release();
             if (errorconnection) {
                 console.log(errorconnection);
-                connection.release();
                 reject(errorconnection);
             } else {
-                connection.release();
                 connection.query(query, function (error, records, fields) {
                     if (error) {
                         reject(error.sqlMessage);
@@ -73,10 +71,42 @@ async function fetch_data(query) {
         return data;
     });
 }
+async function update_data(query) {
+    let data = {
+        result: false,
+        records: '',
+        fields: '',
+        error: ''
+    };
+    return new Promise(function (resolve, reject) {
+        pool.getConnection(function (errorconnection, connection) {
+            connection.release();
+            if (errorconnection) {
+                console.log(errorconnection);
+                reject(errorconnection);
+            } else {
+                connection.query(query, function (error, detail) {
+                    if (error) {
+                        console.log(error);
+                        reject(error);
+                    } else {
+                        data.result = true;
+                        data.records = detail;
+                        resolve(data);
+                    }
+                });
+            }
+        });
+    }).catch(function (error) {
+        data.error = error;
+        return data;
+    });
+}
 async function create_database() {
 
 }
 module.exports = {
     fetch_data,
-    execute_data
+    execute_data,
+    update_data
 };

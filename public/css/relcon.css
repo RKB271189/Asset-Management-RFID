@@ -1,23 +1,36 @@
+.body-gb-color{
+    background-color: #797979;
+}
+.login-header{
+    text-align: center;
+    color: cadetblue;
+    font-weight: 700;
+}
 .logo{
-    color: #067364 !important;
+    color: #cecece !important;
     padding-right: 25px;
-    font-size:20px;
+    font-size:25px;
     font-weight: 700;
 }
 .anchor-a-style ul li a{
-    color:#865205 !important;
+    color:#170992 !important;
     font-weight: 700;
 }
 .logout-a{
     color: red !important;
     font-size: 15px;
-    border: 1px solid #067364;
+    /* border: 1px solid #067364; */
 }   
 .header-color{
-    background-color: #b8dce4;
+    background-color: #797979;
+}
+.page-all-header{
+    color: #17098e;
+    text-decoration: underline;
+    font-size: 22px;
 }
 .jumbotron-j{
-    background-color: #9baeb3;
+    background-color:white;
 }
 .relcon-btn{
     color:white;
@@ -38,7 +51,7 @@
     margin-left: 6px;
 }
 .error-message{
-    color: red;
+    color: #8e1509;
     padding-left:10px;
     font-weight: 600;
 }
@@ -48,12 +61,29 @@
 .grid_view{
 
 }
+.grid_view tr th{
+    white-space: nowrap;
+}
 .grid_view tr td{
     padding:5px !important;
     text-align: center;
+    white-space: nowrap;
+}
+.grid_view tr:nth-child(odd){
+    background-color: #64a2c5;
+    color: #fff;
+}
+.grid_view tr td:first-child{
+    font-weight: 600;
 }
 .grid_view tr th{
     padding:3px !important;
-    background-color: lightseagreen;
+    background-color: #170992;
     color: white;
+}
+.label-css{
+    color: #170992;
+    padding-left: 16px;
+    padding-bottom: 5px;
+    font-size: 16px;
 }

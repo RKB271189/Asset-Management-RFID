@@ -5,6 +5,7 @@ const hbs = require('express-handlebars');
 const session = require('express-session');
 const route = require('./routes/index');
 const flash = require('express-flash');
+const modulehelper=require('./helpers/modulehelper');
 const app = express();
 app.use(session({
     secret: 'uni#rel@off',
@@ -21,13 +22,7 @@ app.engine('hbs', hbs({
     extname: 'hbs',
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: path.join(__dirname, 'views/partials'),
-    helpers: {
-        section: function (name, options) {
-            if (!this._sections) this._sections = {};
-            this._sections[name] = options.fn(this);
-            return null;
-        }
-    }
+    helpers:modulehelper
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));

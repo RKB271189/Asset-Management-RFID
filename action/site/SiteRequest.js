@@ -1,3 +1,4 @@
+const verifysite = require('./SiteController');
 async function CreateSiteRequest(req) {
     return new Promise(function (resolve, reject) {
         let sitecode = req.body.Site_Code;
@@ -23,7 +24,27 @@ async function CreateSiteRequest(req) {
         return false;
     });
 }
-
+async function VerifySite(req) {
+    let sitecode = req.body.Site_Code;
+    return new Promise(function (resolve, reject) {
+        if (!sitecode) {
+            reject("Provide Site Code");
+        } else {
+            verifysite.VerifySiteCode(sitecode, req).then(function (results) {
+                if (!results) {
+                    let err = req.flash('error');
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+            });
+        }
+    }).catch(function (error) {
+        req.flash('error', error);
+        return false;
+    });
+}
 module.exports = {
     CreateSiteRequest,
+    VerifySite
 }

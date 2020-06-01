@@ -12,28 +12,41 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse anchor-a-style">
             <ul class="nav navbar-nav">
-                <li id="li-home"><a href="/web/user/home">Home</a></li>
+                <li id="li-home"><a id="m1" name="m1"
+                        href="/web/user/home/?assetm=1-welcome-to-asset-management">Home</a></li>
                 <li id="li-user" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                         aria-expanded="false">User<span class="caret arrow-dropdown"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/user/create">Create User</a></li>
-                        <li><a href="/web/user/view">View User</a></li>
+                        <li><a id="m2" name="m2" href="/web/user/create/?assetm=2-user">Create User</a></li>
+                        <li><a id="m3" name="m3" href="/web/user/user-view/?assetm=3-user">View User</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/web/user/role">Create Role</a></li>
+                        <li><a id="m4" name="m4" href="/web/user/role/?assetm=4-user-role">Create Role</a></li>
+                        <li><a id="m5" name="m5" href="/web/user/role-view/?assetm=5-user-role">View Role</a></li>
                     </ul>
                 </li>
                 {{!-- <li><a href="/web/asset/create">Create Asset</a></li> --}}
                 <li id="li-configuration" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                         aria-expanded="false">Configuration<span class="caret arrow-dropdown"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/site/create">Create Site</a></li>
-                        <li><a href="/web/site/view">View Site</a></li>
-                        <li role="separator" class="divider"></li>
+                        <li><a id="m6" name="m6" href="/web/site/create/?assetm=6-site">Create Site</a></li>
+                        <li><a id="m7" name="m7" href="/web/site/view/?assetm=7-site">View Site</a></li>
+                        <li id="csep1" role="separator" class="divider"></li>
                         {{!-- <li><a href="/web/asset/create">Create Asset</a></li> --}}
-                        <li><a href="/web/asset/type">Asset Type</a></li>
-                        <li><a href="/web/asset/view">View Asset</a></li>
+                        <li><a id="m8" name="m8" href="/web/asset/type/?assetm=8-asset-type">Asset Type</a></li>
+                        <li><a id="m9" name="m9" href="/web/asset/view/?assetm=9-asset-view">View Asset</a></li>
+                        {{!-- <li role="separator" class="divider"></li>--}}
+                    </ul>
+                </li>
+                <li id="li-report" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false">Report<span class="caret arrow-dropdown"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="m10" name="m10" href="/web/asset/event/?assetm=10-asset-event">Asset Event</a></li>
+                        <li><a id="m11" name="m11" href="/web/asset/track/?assetm=11-asset-track">Asset Tracking</a>
+                        </li>
+                        {{!-- <li role="separator" class="divider"></li> --}}
                     </ul>
                 </li>
             </ul>
@@ -43,6 +56,14 @@
                 <li><a href="/web/user/logout" class="logout-a">Logout</a></li>
             </ul>
         </div>
+        <script>
+            for (var menus = 1; menus < 12; menus++) {
+                var randomstring = Math.random().toString(20).substr(2, 20);
+                var menu_obt_url = document.getElementById("m" + menus).href;
+                menu_obt_url = menu_obt_url + randomstring;
+                document.getElementById("m" + menus).href = menu_obt_url;
+            }            
+        </script>
         <!--/.nav-collapse -->
     </div>
 </nav>

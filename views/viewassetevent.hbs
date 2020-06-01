@@ -1,0 +1,110 @@
+{{#section "content"}}
+<div class="row">
+    <div class="container">
+        <h3 class="page-all-header">View Asset Events(Enter Filter Details)</h3>
+        <div class="panel panel-default">
+            <div class="panel-footer">
+                <span class="error-message">
+                    {{#if message}}
+                    {{message}}
+                    {{/if}}
+                </span>
+            </div>
+            <div class="panel-body">
+                <form method="POST" action="/web/asset/event-search" style="padding-bottom:20px;">
+                    <div class="row">
+                        <div class="form-group" style="padding-bottom: 40px;">
+                            <div class="col-md-2" style="padding-top: 30px;">
+                                <label>Filter details Here</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Assset Code</label>
+                                <input class="form-control" name="Asset_Code" placeholder="Enter Asset Code">
+                            </div>
+                            <div class="col-md-2">
+                                <label>Start Date</label>
+                                <input class="form-control" name="Start_Date" id="Start_Date"
+                                    placeholder="Enter Start Date" value="" readonly>
+                            </div>
+                            <div class="col-md-2">
+                                <label>End Date</label>
+                                <input class="form-control" name="End_Date" id="End_Date" placeholder="Enter End Date"
+                                    value="" readonly>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Site Code</label>
+                                <input class="form-control" name="Site_Code" placeholder="Enter Site Code">
+                            </div>
+                            <div class="col-md-2" style="padding-top:24px;">
+                                <input type="submit" class="btn btn-danger" value="Search" style="float: right;">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{#if pagelink}}
+                        {{{pagelink}}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div style="overflow-y: auto;">
+                    <table class="table table-bordered grid_view">
+                        <thead>
+                            <tr>
+                                <th>Site Code</th>
+                                <th>Asset Code</th>
+                                <th>Asset Type</th>
+                                <th>Description</th>
+                                <th>Tag Id</th>
+                                <th>Serial Number</th>
+                                <th>Model Number</th>
+                                <th>User</th>
+                                <th>Generated Time</th>
+                                <th>Longitude</th>
+                                <th>Latitude</th>
+                            </tr>
+                        </thead>
+                        {{#if event}}
+                        {{#each event}}
+                        <tr>
+                            <td>{{Site_Code}}</td>
+                            <td>{{Asset_Code}}</td>
+                            <td>{{Type_Description}}</td>
+                            <td>{{Asset_Description}}</td>
+                            <td>{{Tag_Id}}</td>
+                            <td>{{Serial_Number}}</td>
+                            <td>{{Model_Number}}</td>
+                            <td>{{Login_Id}}</td>
+                            <td>{{Generate_Time}}</td>
+                            <td>{{Longitude}}</td>
+                            <td>{{Latitude}}</td>
+                        </tr>
+                        {{/each}}
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('li-report').classList.add('active');
+    $(function () {
+        $("#Start_Date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+150",
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    $(function () {
+        $("#End_Date").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+150",
+            dateFormat: "yy-mm-dd"
+        });
+    });
+</script>
+{{/section}}

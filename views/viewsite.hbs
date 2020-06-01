@@ -1,7 +1,7 @@
 {{#section "content"}}
-<div class="jumbotron jumbotron-j">
+<div class="row">
     <div class="container">
-        <h3>View Site</h3>
+        <h3 class="page-all-header">View Site</h3>
         <div class="panel panel-default">
             <div class="panel-body">
                 <table class="table table-bordered grid_view">
@@ -14,27 +14,26 @@
                             <th>Zone</th>
                             <th>Region</th>
                         </tr>
-                        {{#if site}}
-                        {{#each site}}
-                        <tr>
-                            <td>
-                                <a href="/web/asset/create?site_code={{Site_Code}}"
-                                    class="btn btn-primary btn-sm">Create Asset</a>
-                            </td>
-                            <td>
-                                <a href="/web/site/delete?site_code={{Site_Code}}&site_id={{Site_Id}}"
-                                    class="btn btn-primary btn-sm">Delete
-                                    Site</a>
-                            </td>
-                            <td>{{Site_Code}}</td>
-                            <td>{{Site_Name}}</td>
-                            <td>{{Zone}}</td>
-                            <td>{{Region}}</td>
-                        </tr>
-                        {{/each}}
-                        {{/if}}
                     </thead>
-
+                    {{#if site}}
+                    {{#each site}}
+                    <tr>
+                        <td>
+                            <a href="/web/asset/create?site_code={{Site_Code}}" class="btn btn-warning btn-sm">Create
+                                Asset</a>
+                        </td>
+                        <td>
+                            <a href="/web/site/delete?site_code={{Site_Code}}&site_id={{Site_Id}}"
+                                class="btn btn-danger btn-sm">Delete
+                                Site</a>
+                        </td>
+                        <td>{{Site_Code}}</td>
+                        <td>{{Site_Name}}</td>
+                        <td>{{Zone}}</td>
+                        <td>{{Region}}</td>
+                    </tr>
+                    {{/each}}
+                    {{/if}}
                 </table>
             </div>
             {{#if message}}

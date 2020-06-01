@@ -4,7 +4,7 @@ async function CreateAssetRequest(req) {
         let assettype = req.body.Asset_Type;
         let description = req.body.Description;
         let sitecode = req.body.Site_Code;
-        let tagid = req.body.Tag_Id;
+        // let tagid = req.body.Tag_Id;
 
         if (!assetcode) {
             reject("Asset Code is mandatory");
@@ -14,8 +14,6 @@ async function CreateAssetRequest(req) {
             reject("Description is mandatory");
         } else if (!sitecode) {
             reject("Site Code is mandatory");
-        } else if (!tagid) {
-            reject("Tag Id is mandatory");
         } else {
             resolve(true);
         }
@@ -40,7 +38,72 @@ async function CreateAssetTypeRequest(req) {
         return false;
     });
 }
+
+async function GetAssetEventRequest(req) {
+    let assetcode = req.body.Asset_Code;
+    let startdate = req.body.Start_Date;
+    let enddate = req.body.End_Date;
+    let sitecode = req.body.Site_Code;
+    let ifonefill = false;
+    return new Promise(function (resolve, reject) {
+        if (assetcode) {
+            ifonefill = true;
+        } else if (startdate) {
+            ifonefill = true;
+        } else if (enddate) {
+            if (!startdate) {
+                ifonefill = false;
+                reject("Please select Start Date");
+            } else {
+                ifonefill = true;
+            }
+        } else if (sitecode) {
+            ifonefill = true;
+        }
+        if (!ifonefill) {
+            reject("Please provide atleast one filter");
+        } else {
+            resolve(true);
+        }
+    }).catch(function (error) {
+        req.flash('error', error);
+        return false;
+    });
+}
+async function GetAssetTrackRequest(req) {
+    return new Promise(function (resolve, reject) {
+        let assetcode = req.body.Asset_Code;
+        let startdate = req.body.Start_Date;
+        let enddate = req.body.End_Date;
+        let sitecode = req.body.Site_Code;
+        let ifonefill = false;
+        if (assetcode) {
+            ifonefill = true;
+        } else if (startdate) {
+            ifonefill = true;
+        } else if (enddate) {
+            if (!startdate) {
+                ifonefill = false;
+                reject("Please provide Start Date");
+            } else {
+                ifonefill = true;
+            }
+        } else if (sitecode) {
+            ifonefill = true
+        }
+        if (!ifonefill) {
+            reject("Please provide atleast one detail");
+        } else {
+            resolve(true);
+        }
+    }).catch(function (error) {
+        req.flash('error', error);
+        return false;
+    });
+}
 module.exports = {
     CreateAssetRequest,
-    CreateAssetTypeRequest
+    CreateAssetTypeRequest,
+    GetAssetEventRequest,
+    GetAssetTrackRequest
 }
