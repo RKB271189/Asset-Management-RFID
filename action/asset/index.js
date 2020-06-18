@@ -83,7 +83,8 @@ asset.get('/edit-asset', async (req, res) => {
                         Serial_Number: '',
                         Asset_Type: '',
                         Description: '',
-                        type: ''
+                        type: '',
+                        Responsible_Warehouse: ''
                     });
                 } else {
                     let array_asset = req.flash('asset');
@@ -97,7 +98,8 @@ asset.get('/edit-asset', async (req, res) => {
                                 Serial_Number: '',
                                 Asset_Type: '',
                                 Description: '',
-                                type: ''
+                                type: '',
+                                Responsible_Warehouse: ''
                             });
                         } else {
                             res.render('updateasset', {
@@ -109,6 +111,7 @@ asset.get('/edit-asset', async (req, res) => {
                                 Asset_Type: array_asset[0].Asset_Type,
                                 Description: array_asset[0].Description,
                                 Site_Code: array_asset[0].Site_Code,
+                                Responsible_Warehouse: array_asset[0].Responsible_Warehouse,
                                 type: results
                             });
                         }

@@ -57,7 +57,8 @@ async function GetAsset(req) {
                                     Serial_Number: records[i].Serial_Number,
                                     Model_Number: records[i].Model_Number,
                                     Create_Date: records[i].Create_Date,
-                                    Modify_Date: records[i].Modify_Date
+                                    Modify_Date: records[i].Modify_Date,
+                                    Responsible_Warehouse:records[i].Responsible_Warehouse
                                 };
                                 array_asset.push(data);
                             }

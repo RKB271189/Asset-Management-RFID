@@ -16,7 +16,8 @@ async function CreateAsset(req) {
         Serial_Number: req.body.Serial_Number,
         Model_Number: req.body.Model_Number,
         Create_Date: currentdate,
-        Modify_Date: currentdate
+        Modify_Date: currentdate,
+        Responsible_Warehouse:req.body.Responsible_Warehouse
     };
     let query = "Insert into assetmaster set ?";
     return new Promise(function (resolve, reject) {
@@ -34,9 +35,13 @@ async function CreateAsset(req) {
     });
 }
 async function CreateAssetType(req) {
+    let lifemonth = req.body.Life_Month;
+    if (!lifemonth)
+        lifemonth = '';
     let post = {
         Type_Code: req.body.Type_Code,
-        Description: req.body.Description
+        Description: req.body.Description,
+        Life_Month: lifemonth
     };
     let query = "Insert into typemaster set ?";
     return new Promise(function (resolve, reject) {
@@ -91,7 +96,8 @@ async function UpdateAsset(req) {
         let modelnumber = req.body.Model_Number;
         let serialnumber = req.body.Serial_Number;
         let assettype = req.body.Asset_Type;
-        let query = "update assetmaster set Site_Code='" + sitecode + "',Asset_Code=" + assetcode + ",Asset_Type='" + assettype + "',Description='" + description + "',Model_Number='" + modelnumber + "',Serial_Number='" + serialnumber + "' where Id=" + assetid + "";
+        let responsiblewarehouse=req.body.Responsible_Warehouse;
+        let query = "update assetmaster set Site_Code='" + sitecode + "',Asset_Code=" + assetcode + ",Asset_Type='" + assettype + "',Description='" + description + "',Model_Number='" + modelnumber + "',Serial_Number='" + serialnumber + "',Responsible_Warehouse='"+responsiblewarehouse+"' where Id=" + assetid + "";
         database.update_data(query).then(function (results) {
             if (!results.result) {
                 reject(results.error);
@@ -148,6 +154,7 @@ async function GetAssetDetails(req) {
                             Tag_Status: records[i].Tag_Status,
                             Serial_Number: records[i].Serial_Number,
                             Model_Number: records[i].Model_Number,
+                            Responsible_Warehouse:records[i].Responsible_Warehouse
                         }
                         array_asset.push(data);
                     }
@@ -179,7 +186,8 @@ async function GetAssetDetailsOnUpdate(req) {
                         Serial_Number: records[0].Serial_Number,
                         Description: records[0].Description,
                         Asset_Code: records[0].Asset_Code,
-                        Asset_Type: records[0].Asset_Type
+                        Asset_Type: records[0].Asset_Type,
+                        Responsible_Warehouse:records[0].Responsible_Warehouse
                     };
                     req.flash('asset', data);
                     resolve(true);

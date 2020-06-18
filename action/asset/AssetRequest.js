@@ -5,6 +5,7 @@ async function CreateAssetRequest(req) {
         let description = req.body.Description;
         let sitecode = req.body.Site_Code;
         // let tagid = req.body.Tag_Id;
+        let responsiblewarehouse = req.body.Responsible_Warehouse;
 
         if (!assetcode) {
             reject("Asset Code is mandatory");
@@ -14,7 +15,9 @@ async function CreateAssetRequest(req) {
             reject("Description is mandatory");
         } else if (!sitecode) {
             reject("Site Code is mandatory");
-        } else {
+        } else if (!responsiblewarehouse) {
+            reject("Responsible warehouse is mandatory");
+        }else {
             resolve(true);
         }
     }).catch(function (error) {
