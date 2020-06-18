@@ -5,34 +5,36 @@
         <div class="panel panel-default">
             <form method="POST" action="/web/user/role-update">
                 <div class="panel-body">
-                    <table class="table table-bordered grid_view">
-                        <thead>
+                    <div style="overflow-y: auto;">
+                        <table class="table table-bordered grid_view">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Login Id</th>
+                                    <th>Role</th>
+                                    <th>First Name</th>
+                                    <th>Mobile No</th>
+                                    <th>Email Id</th>
+                                </tr>
+                            </thead>
+                            {{#if user}}
+                            {{#each user}}
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th>Login Id</th>
-                                <th>Role</th>
-                                <th>First Name</th>
-                                <th>Mobile No</th>
-                                <th>Email Id</th>
+                                <td><a href="/web/user/user-edit?user={{User_Id}}"
+                                        class="btn btn-warning btn-sm">Update</a></td>
+                                <td><a href="/web/user/user-delete?user={{User_Id}}"
+                                        class="btn btn-danger btn-sm">Delete</a></td>
+                                <td>{{Login_Id}}</td>
+                                <td>{{Role}}</td>
+                                <td>{{First_Name}}</td>
+                                <td>{{Mobile_No}}</td>
+                                <td>{{Email_Id}}</td>
                             </tr>
-                        </thead>
-                        {{#if user}}
-                        {{#each user}}
-                        <tr>
-                            <td><a href="/web/user/user-edit?user={{User_Id}}"
-                                    class="btn btn-warning btn-sm">Update</a></td>
-                            <td><a href="/web/user/user-delete?user={{User_Id}}"
-                                    class="btn btn-danger btn-sm">Delete</a></td>
-                            <td>{{Login_Id}}</td>
-                            <td>{{Role}}</td>
-                            <td>{{First_Name}}</td>
-                            <td>{{Mobile_No}}</td>
-                            <td>{{Email_Id}}</td>                            
-                        </tr>
-                        {{/each}}
-                        {{/if}}
-                    </table>
+                            {{/each}}
+                            {{/if}}
+                        </table>
+                    </div>
                 </div>
             </form>
             {{#if message}}

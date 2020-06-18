@@ -28,15 +28,15 @@ async function GetAsset(req) {
                 //getting asset details according to user role
                 query = "";
                 if (roleid === 1) {
-                    query = "Select assetmaster.*,typemaster.Description as Type_Description from assetmaster left join typemaster on assetmaster.Asset_Type=typemaster.Type_Code where Site_Code='" + sitecode + "' and Tag_Status=0";
+                    query = "Select assetmaster.*,typemaster.Description as Type_Description from assetmaster left join typemaster on assetmaster.Asset_Type=typemaster.Type_Code where Site_Code='" + sitecode + "' and (Tag_Status is null or Tag_Status = 0)";
                 } else if (roleid === 2) {
                     query = "Select assetmaster.*,typemaster.Description as Type_Description from assetmaster left join typemaster on assetmaster.Asset_Type=typemaster.Type_Code where Site_Code='" + sitecode + "' and Tag_Status=1";
                 } else if (roleid === 101) {
-                    query = "Select assetmaster.*,typemaster.Description as Type_Description from assetmaster left join typemaster on assetmaster.Asset_Type=typemaster.Type_Code where Site_Code='" + sitecode + "' and Tag_Status=0";
+                    query = "Select assetmaster.*,typemaster.Description as Type_Description from assetmaster left join typemaster on assetmaster.Asset_Type=typemaster.Type_Code where Site_Code='" + sitecode + "' and (Tag_Status is null or Tag_Status = 0)";
                 }
                 //if the role is assign for outlet or warehouse or developer
                 if (roleid === 1 || roleid === 101 || roleid === 2) {
-                    database.fetch_data(query).then(function (results) {
+                    database.fetch_data(query).then(async function (results) {
                         if (!results.result) {
                             reject(results.error);
                         } else {
@@ -44,7 +44,20 @@ async function GetAsset(req) {
 
                             let len = records.length;
 
+                            let crtdate = '';
+                            let moddate = '';
                             for (let i = 0; i < len; i++) {
+                                crtdate = records[i].Create_Date;
+                                if (!crtdate || crtdate == null)
+                                    crtdate = ''
+                                else
+                                    crtdate = await othermethods.AppFormatDate(crtdate);
+
+                                moddate = records[i].Modify_Date;
+                                if (!moddate || moddate == null)
+                                    moddate = '';
+                                else
+                                    moddate = await othermethods.AppFormatDate(moddate);
                                 let data = {
                                     Asset_Id: records[i].Id,
                                     Asset_Code: records[i].Asset_Code,
@@ -56,9 +69,9 @@ async function GetAsset(req) {
                                     Tag_Status: records[i].Tag_Status,
                                     Serial_Number: records[i].Serial_Number,
                                     Model_Number: records[i].Model_Number,
-                                    Create_Date: records[i].Create_Date,
-                                    Modify_Date: records[i].Modify_Date,
-                                    Responsible_Warehouse:records[i].Responsible_Warehouse
+                                    Create_Date: crtdate,
+                                    Modify_Date: moddate,
+                                    Responsible_Warehouse: records[i].Responsible_Warehouse
                                 };
                                 array_asset.push(data);
                             }
@@ -88,7 +101,7 @@ async function RegisterAssetEvent(req) {
         details: []
     }
     let currentdatetime = await othermethods.GetCurrentDate();
-    let gentime=await othermethods.FormatDate(req.body.Generate_Time);
+    let gentime = await othermethods.AppFormatDate(req.body.Generate_Time);
     let post = {
         Asset_Id: req.body.Asset_Id,
         Asset_Code: req.body.Asset_Code,
@@ -139,7 +152,7 @@ async function RegisterAssetTracking(req) {
         details: []
     }
     //let currentdatetime = await othermethods.GetCurrentDate();
-    let tracktime=await othermethods.FormatDate(req.body.Track_Time);
+    let tracktime = await othermethods.AppFormatDate(req.body.Track_Time);
     let post = {
         Track_Time: tracktime,
         Site_Code: req.body.Site_Code,
@@ -201,13 +214,27 @@ async function GetAssetAfterEvent(req) {
             } else {
                 query = "Select assetmaster.*,typemaster.Description as Type_Description from assetmaster left join typemaster on assetmaster.Asset_Type=typemaster.Type_Code where Site_Code='" + sitecode + "' and Tag_Status=2";
             }
-            database.fetch_data(query).then(function (results) {
+            database.fetch_data(query).then(async function (results) {
                 if (!results.result) {
                     reject(results.error)
                 } else {
                     let records = results.records;
                     let len = records.len;
+                    let moddate = '';
+                    let crtdate = '';
                     for (let i = 0; i < len; i++) {
+                        crtdate = records[i].Create_Date;
+                        if (!crtdate || crtdate == null)
+                            crtdate = '';
+                        else
+                            crtdate = await othermethods.AppFormatDate(crtdate);
+
+                        moddate = records[i].Modify_Date;
+                        if (!moddate || moddate == null)
+                            moddate = '';
+                        else
+                            moddate = await othermethods.AppFormatDate(moddate);
+                        moddate = records[i].Modify_Date;
                         let data = {
                             Asset_Id: records[i].Id,
                             Asset_Code: records[i].Asset_Code,
@@ -219,8 +246,9 @@ async function GetAssetAfterEvent(req) {
                             Tag_Status: records[i].Tag_Status,
                             Serial_Number: records[i].Serial_Number,
                             Model_Number: records[i].Model_Number,
-                            Create_Date: records[i].Create_Date,
-                            Modify_Date: records[i].Modify_Date
+                            Create_Date: crtdate,
+                            Modify_Date: moddate,
+                            Responsible_Warehouse: records[i].Responsible_Warehouse
                         };
                         array_asset.push(data);
                     }

@@ -5,43 +5,47 @@
         <div class="panel panel-default">
             <form method="POST" action="/web/user/role-update">
                 <div class="panel-body">
-                    <table class="table table-bordered grid_view">
-                        <thead>
+                    <div style="overflow-y: auto;">
+                        <table class="table table-bordered grid_view">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Role Type(Fill this to update)</th>
+                                    <th>Role Name(Fill this to update)</th>
+                                    <th>Role Code</th>
+                                </tr>
+                            </thead>
+                            {{#if role}}
+                            {{#each role}}
+                            {{#ifneq Role_Code 101}}
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th>Role Type(Fill this to update)</th>
-                                <th>Role Name(Fill this to update)</th>
-                                <th>Role Code</th>
+                                <td>
+                                    <input type="submit" name="Role_Id_{{Role_Id}}" class="btn btn-warning btn-sm"
+                                        value="Update">
+                                </td>
+                                <td>
+                                    <a href="/web/user/role-delete?role={{Role_Id}}"
+                                        class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                                <td>
+                                    <a href="/web/user/role-permission?role={{Role_Id}}" class="btn btn-primary btn-sm"
+                                        style="border-color: #ff5722;">Permission</a>
+                                </td>
+                                <td><input type="text" name="Role_Type_{{Role_Id}}" class="form-input"
+                                        value="{{Role_Type}}"
+                                        style="color: black;text-align: center;border:1px solid cadetblue;"></td>
+                                <td><input type="text" name="Role_Name_{{Role_Id}}" class="form-input"
+                                        value="{{Role_Name}}"
+                                        style="color: black;text-align: center;border:1px solid cadetblue;"></td>
+                                <td>{{Role_Code}}</td>
                             </tr>
-                        </thead>
-                        {{#if role}}
-                        {{#each role}}
-                        {{#ifneq Role_Code 101}}
-                        <tr>
-                            <td>
-                                <input type="submit" name="Role_Id_{{Role_Id}}" class="btn btn-warning btn-sm"
-                                    value="Update">
-                            </td>
-                            <td>
-                                <a href="/web/user/role-delete?role={{Role_Id}}"
-                                    class="btn btn-danger btn-sm">Delete</a>
-                            </td>
-                            <td>
-                                <a href="/web/user/role-permission?role={{Role_Id}}" class="btn btn-primary btn-sm"
-                                    style="border-color: #ff5722;">Permission</a>
-                            </td>
-                            <td><input type="text" name="Role_Type_{{Role_Id}}" class="form-input" value="{{Role_Type}}"
-                                    style="color: black;text-align: center;border:1px solid cadetblue;"></td>
-                            <td><input type="text" name="Role_Name_{{Role_Id}}" class="form-input" value="{{Role_Name}}"
-                                    style="color: black;text-align: center;border:1px solid cadetblue;"></td>
-                            <td>{{Role_Code}}</td>
-                        </tr>
-                        {{/ifneq}}
-                        {{/each}}
-                        {{/if}}
-                    </table>
+                            {{/ifneq}}
+                            {{/each}}
+                            {{/if}}
+                        </table>
+                    </div>
                 </div>
             </form>
             {{#if message}}

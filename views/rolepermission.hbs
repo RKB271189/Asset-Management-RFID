@@ -14,56 +14,57 @@
                     {{/if}}
                 </div>
                 <div class="panel-body">
-                    <table id="table_permission" class="table table-bordered grid_view">
-                        <thead>
+                    <div style="overflow-y: auto;">
+                        <table id="table_permission" class="table table-bordered grid_view">
+                            <thead>
+                                <tr>
+                                    <th>Serial No.</th>
+                                    <th></th>
+                                    <th>Menu Serial No.</th>
+                                    <th>Menu</th>
+                                </tr>
+                            </thead>
                             <tr>
-                                <th>Serial No.</th>
-                                <th></th>
-                                <th>Menu Serial No.</th>
-                                <th>Menu</th>
+                                <td>1</td>
+                                <td>
+                                    <input name="m1" id="m1" type="checkbox" checked="checked" onclick="return false;">
+                                </td>
+                                <td>Home</td>
+                                <td>Menu Name - Home</td>
                             </tr>
-                        </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>
-                                <input name="m1" id="m1" type="checkbox" checked="checked" onclick="return false;">
-                            </td>
-                            <td>Home</td>
-                            <td>Menu Name - Home</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>
-                                <input name="m2" id="m2" type="checkbox">
-                            </td>
-                            <td>User Menu-1</td>
-                            <td>Menu Name - Create User</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>
-                                <input name="m3" id="m3" type="checkbox">
-                            </td>
-                            <td>User Menu-2</td>
-                            <td>Menu Name - View User</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>
-                                <input name="m4" id="m4" type="checkbox">
-                            </td>
-                            <td>User Menu-3</td>
-                            <td>Menu Name - Create Role</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>
-                                <input name="m5" id="m5" type="checkbox">
-                            </td>
-                            <td>User Menu-4</td>
-                            <td>Menu Name - View Role</td>
-                        </tr>
-                        {{!-- <tr>
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <input name="m2" id="m2" type="checkbox">
+                                </td>
+                                <td>User Menu-1</td>
+                                <td>Menu Name - Create User</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <input name="m3" id="m3" type="checkbox">
+                                </td>
+                                <td>User Menu-2</td>
+                                <td>Menu Name - View User</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>
+                                    <input name="m4" id="m4" type="checkbox">
+                                </td>
+                                <td>User Menu-3</td>
+                                <td>Menu Name - Create Role</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>
+                                    <input name="m5" id="m5" type="checkbox">
+                                </td>
+                                <td>User Menu-4</td>
+                                <td>Menu Name - View Role</td>
+                            </tr>
+                            {{!-- <tr>
                             <td>6</td>
                             <td>
                                 <input name="m6" id="m6" type="checkbox">
@@ -71,39 +72,39 @@
                             <td>User Menu-5</td>
                             <td>Menu Name - User Permission</td>
                         </tr> --}}
-                        <tr>
-                            <td>6</td>
-                            <td>
-                                <input name="m6" id="m6" type="checkbox">
-                            </td>
-                            <td>Configuration Menu-1</td>
-                            <td>Menu Name - Create Site</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>
-                                <input name="m7" id="m7" type="checkbox">
-                            </td>
-                            <td>Configuration Menu-2</td>
-                            <td>Menu Name - View Site</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>
-                                <input name="m8" id="m8" type="checkbox">
-                            </td>
-                            <td>Configuration Menu-3</td>
-                            <td>Menu Name - Asset Type</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>
-                                <input name="m9" id="m9" type="checkbox">
-                            </td>
-                            <td>Configuration Menu-4</td>
-                            <td>Menu Name - View Asset</td>
-                        </tr>
-                        {{!-- <tr>
+                            <tr>
+                                <td>6</td>
+                                <td>
+                                    <input name="m6" id="m6" type="checkbox">
+                                </td>
+                                <td>Configuration Menu-1</td>
+                                <td>Menu Name - Create Site</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>
+                                    <input name="m7" id="m7" type="checkbox">
+                                </td>
+                                <td>Configuration Menu-2</td>
+                                <td>Menu Name - View Site</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>
+                                    <input name="m8" id="m8" type="checkbox">
+                                </td>
+                                <td>Configuration Menu-3</td>
+                                <td>Menu Name - Asset Type</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>
+                                    <input name="m9" id="m9" type="checkbox">
+                                </td>
+                                <td>Configuration Menu-4</td>
+                                <td>Menu Name - View Asset</td>
+                            </tr>
+                            {{!-- <tr>
                             <td>11</td>
                             <td>
                                 <input name="m10" name="m10" type="checkbox">
@@ -111,23 +112,24 @@
                             <td>Configuration Menu-5</td>
                             <td>Menu Name - Create Asset</td>
                         </tr> --}}
-                        <tr>
-                            <td>10</td>
-                            <td>
-                                <input name="m10" id="m10" type="checkbox">
-                            </td>
-                            <td>Report Menu-1</td>
-                            <td>Menu Name - Asset Event</td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>
-                                <input name="m11" id="m11" type="checkbox">
-                            </td>
-                            <td>Report Menu-2</td>
-                            <td>Menu Name - Asset Tracking</td>
-                        </tr>
-                    </table>
+                            <tr>
+                                <td>10</td>
+                                <td>
+                                    <input name="m10" id="m10" type="checkbox">
+                                </td>
+                                <td>Report Menu-1</td>
+                                <td>Menu Name - Asset Event</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>
+                                    <input name="m11" id="m11" type="checkbox">
+                                </td>
+                                <td>Report Menu-2</td>
+                                <td>Menu Name - Asset Tracking</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </form>
         </div>
@@ -146,7 +148,7 @@
         var access_array = access.split(',');
         for (var j = 0; j < access_array.length; j++) {
             let accessmenu = access_array[j];
-            for (var i = 2; i < table_lenght; i++) {                             
+            for (var i = 2; i < table_lenght; i++) {
                 let menu = 'm' + i;
                 if (accessmenu == menu) {
                     table_permission.rows[i].cells[1].getElementsByTagName("input")[0].checked = true;

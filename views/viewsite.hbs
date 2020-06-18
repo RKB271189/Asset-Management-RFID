@@ -4,37 +4,40 @@
         <h3 class="page-all-header">View Site</h3>
         <div class="panel panel-default">
             <div class="panel-body">
-                <table class="table table-bordered grid_view">
-                    <thead>
+                <div style="overflow-y: auto;">
+                    <table class="table table-bordered grid_view">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>Site Code</th>
+                                <th>Site Name</th>
+                                <th>Zone</th>
+                                <th>Region</th>
+                            </tr>
+                        </thead>
+                        {{#if site}}
+                        {{#each site}}
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th>Site Code</th>
-                            <th>Site Name</th>
-                            <th>Zone</th>
-                            <th>Region</th>
+                            <td>
+                                <a href="/web/asset/create?site_code={{Site_Code}}"
+                                    class="btn btn-warning btn-sm">Create
+                                    Asset</a>
+                            </td>
+                            <td>
+                                <a href="/web/site/delete?site_code={{Site_Code}}&site_id={{Site_Id}}"
+                                    class="btn btn-danger btn-sm">Delete
+                                    Site</a>
+                            </td>
+                            <td>{{Site_Code}}</td>
+                            <td>{{Site_Name}}</td>
+                            <td>{{Zone}}</td>
+                            <td>{{Region}}</td>
                         </tr>
-                    </thead>
-                    {{#if site}}
-                    {{#each site}}
-                    <tr>
-                        <td>
-                            <a href="/web/asset/create?site_code={{Site_Code}}" class="btn btn-warning btn-sm">Create
-                                Asset</a>
-                        </td>
-                        <td>
-                            <a href="/web/site/delete?site_code={{Site_Code}}&site_id={{Site_Id}}"
-                                class="btn btn-danger btn-sm">Delete
-                                Site</a>
-                        </td>
-                        <td>{{Site_Code}}</td>
-                        <td>{{Site_Name}}</td>
-                        <td>{{Zone}}</td>
-                        <td>{{Region}}</td>
-                    </tr>
-                    {{/each}}
-                    {{/if}}
-                </table>
+                        {{/each}}
+                        {{/if}}
+                    </table>
+                </div>
             </div>
             {{#if message}}
             <div class="panel-footer">
