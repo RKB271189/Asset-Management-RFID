@@ -44,7 +44,7 @@ async function GetAssetEventVerifiaction(req) {
                 if (count === 0) {
                     resolve(true);
                 } else {
-                    reject("Asset is already scanned");
+                    reject("The tag for asset is already scanned and written");
                 }
             }
         });
@@ -71,7 +71,7 @@ async function GetAssetTrackVerification(req) {
                 if (count === 0) {
                     resolve(true);
                 } else {
-                    reject("Asset is already scanned");
+                    resolve(true);
                 }
             }
         });

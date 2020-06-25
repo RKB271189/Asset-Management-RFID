@@ -17,7 +17,7 @@ async function CreateAsset(req) {
         Model_Number: req.body.Model_Number,
         Create_Date: currentdate,
         Modify_Date: currentdate,
-        Responsible_Warehouse:req.body.Responsible_Warehouse
+        Responsible_Warehouse: req.body.Responsible_Warehouse
     };
     let query = "Insert into assetmaster set ?";
     return new Promise(function (resolve, reject) {
@@ -96,8 +96,8 @@ async function UpdateAsset(req) {
         let modelnumber = req.body.Model_Number;
         let serialnumber = req.body.Serial_Number;
         let assettype = req.body.Asset_Type;
-        let responsiblewarehouse=req.body.Responsible_Warehouse;
-        let query = "update assetmaster set Site_Code='" + sitecode + "',Asset_Code=" + assetcode + ",Asset_Type='" + assettype + "',Description='" + description + "',Model_Number='" + modelnumber + "',Serial_Number='" + serialnumber + "',Responsible_Warehouse='"+responsiblewarehouse+"' where Id=" + assetid + "";
+        let responsiblewarehouse = req.body.Responsible_Warehouse;
+        let query = "update assetmaster set Site_Code='" + sitecode + "',Asset_Code=" + assetcode + ",Asset_Type='" + assettype + "',Description='" + description + "',Model_Number='" + modelnumber + "',Serial_Number='" + serialnumber + "',Responsible_Warehouse='" + responsiblewarehouse + "',Tag_Status=0 where Id=" + assetid + "";
         database.update_data(query).then(function (results) {
             if (!results.result) {
                 reject(results.error);
@@ -132,9 +132,9 @@ async function DeleteAsset(req) {
 async function GetAssetDetails(req) {
     let sitecode = req.body.Site_Code;
     let array_asset = [];
-    let query = "Select *,assetmaster.Id as Asset_Id,assetmaster.Description as AssetDescription,typemaster.Description as Type_Description from assetmaster inner join typemaster on assetmaster.Asset_Type=typemaster.Type_Code where Site_Code='" + sitecode + "'";
+    let query = "Select assetmaster.*,assetmaster.Id as Asset_Id,assetmaster.Description as AssetDescription,typemaster.Description as Type_Description,tagevent.Generate_Time,tagtracking.Track_Time from assetmaster inner join typemaster on assetmaster.Asset_Type=typemaster.Type_Code left join tagevent on tagevent.Site_Code=assetmaster.Site_Code left join tagtracking on tagtracking.Site_Code=assetmaster.Site_Code where assetmaster.Site_Code='" + sitecode + "' group by assetmaster.Id";
     return new Promise(function (resolve, reject) {
-        database.fetch_data(query).then(function (results) {
+        database.fetch_data(query).then(async function (results) {
             if (!results.result) {
                 reject(results.error);
             } else {
@@ -144,6 +144,24 @@ async function GetAssetDetails(req) {
                     reject("No records found for this site");
                 } else {
                     for (let i = 0; i < len; i++) {
+                        let crtdate = records[i].Create_Date;
+                        let gendate = records[i].Generate_Time;
+                        let trackdate = records[i].Track_Time;
+                        if (!crtdate || crtdate == null) {
+                            crtdate = '';
+                        } else {
+                            crtdate = await othermethods.FormatDate(crtdate);
+                        }
+                        if (!gendate || gendate == null) {
+                            gendate = '';
+                        } else {
+                            gendate = await othermethods.FormatDate(gendate);
+                        }
+                        if (!trackdate || trackdate == null) {
+                            trackdate = '';
+                        } else {
+                            trackdate = await othermethods.FormatDate(trackdate);
+                        }
                         let data = {
                             Asset_Id: records[i].Asset_Id,
                             Site_Code: records[i].Site_Code,
@@ -154,7 +172,10 @@ async function GetAssetDetails(req) {
                             Tag_Status: records[i].Tag_Status,
                             Serial_Number: records[i].Serial_Number,
                             Model_Number: records[i].Model_Number,
-                            Responsible_Warehouse:records[i].Responsible_Warehouse
+                            Responsible_Warehouse: records[i].Responsible_Warehouse,
+                            Generate_Time: gendate,
+                            Track_Time: trackdate,
+                            Create_Date: crtdate
                         }
                         array_asset.push(data);
                     }
@@ -187,7 +208,7 @@ async function GetAssetDetailsOnUpdate(req) {
                         Description: records[0].Description,
                         Asset_Code: records[0].Asset_Code,
                         Asset_Type: records[0].Asset_Type,
-                        Responsible_Warehouse:records[0].Responsible_Warehouse
+                        Responsible_Warehouse: records[0].Responsible_Warehouse
                     };
                     req.flash('asset', data);
                     resolve(true);

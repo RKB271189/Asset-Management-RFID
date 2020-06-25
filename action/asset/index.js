@@ -64,15 +64,15 @@ asset.get('/view', async (req, res) => {
     res.render('viewasset', { message: req.flash('error'), asset: req.flash('asset') });
 });
 asset.get('/edit-asset', async (req, res) => {
-    await verify.VerifyAssetIfscanned(req).then(async function (results) {
-        if (!results) {
-            let sitecode = req.query.site;
-            req.body["Site_Code"] = sitecode;
-            await controller.GetAssetDetails(req).then(function (results) {
-                req.flash('asset', results);
-                res.render('viewasset', { message: req.flash('error'), asset: req.flash('asset') });
-            });
-        } else {
+    // await verify.VerifyAssetIfscanned(req).then(async function (results) {
+    //     if (!results) {
+    //         let sitecode = req.query.site;
+    //         req.body["Site_Code"] = sitecode;
+    //         await controller.GetAssetDetails(req).then(function (results) {
+    //             req.flash('asset', results);
+    //             res.render('viewasset', { message: req.flash('error'), asset: req.flash('asset') });
+    //         });
+    //     } else {
             await controller.GetAssetDetailsOnUpdate(req).then(async function (results) {
                 if (!results) {
                     res.render('updateasset', {
@@ -118,17 +118,23 @@ asset.get('/edit-asset', async (req, res) => {
                     });
                 }
             });
-        }
-    });
+        //}
+    //});
 });
-asset.post('/update-asset', async (req, res) => {
+asset.post('/update-asset', async (req, res) => {    
     await request.CreateAssetRequest(req).then(async function (results) {
         if (!results) {
             res.redirect('edit-asset/?asset=' + req.body.Asset_Id + '&site=' + req.body.Site_Code);
         } else {
-            await controller.UpdateAsset(req).then(function (results) {
-                res.redirect('edit-asset/?asset=' + req.body.Asset_Id + '&site=' + req.body.Site_Code);
-            });
+            await siterequest.VerifySite(req).then(async function(results){
+                if(!results){
+                    res.redirect('edit-asset/?asset=' + req.body.Asset_Id + '&site=' + req.body.Site_Code);
+                }else{
+                    await controller.UpdateAsset(req).then(function (results) {
+                        res.redirect('edit-asset/?asset=' + req.body.Asset_Id + '&site=' + req.body.Site_Code);
+                    });
+                }
+            });            
         }
     });
 });
